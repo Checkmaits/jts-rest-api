@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      @page {
+        size: A4;
+        margin: 1cm;
+      }
+
+      body {
+        font-family: sans-serif;
+        font-size: 12px;
+      }
+
+      .invoice-container {
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .table td,
+      .table th {
+        vertical-align: middle;
+      }
+
+      h5,
+      h6 {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="invoice-container py-5">
+      <div class="card">
+        <!-- Card Header -->
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <a href="https://jtsoutdoorfabrics.com" class="h5 mb-0 text-decoration-none">JT's Outdoor Fabrics</a>
+          <div class="text-right">
+            <h5 class="mb-1">Invoice {{ invoice_number }}</h5>
+            <small>Date: {{ invoice_date }}</small>
+          </div>
+        </div>
+
+        <!-- Card Body -->
+        <div class="card-body">
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <h6 class="mb-2">Billing Address:</h6>
+              <p class="mb-0 font-weight-bold">{{ billing.name }}</p>
+              <p class="mb-0">{{ billing.address }}</p>
+              {% if billing.address2 %}
+              <p class="mb-0">{{ billing.address2 }}</p>
+              {% endif %}
+              <p class="mb-0">{{ billing.city }}, {{ billing.province }}, {{ billing.zip }}</p>
+              <p class="mb-0">{{ billing.email }}</p>
+              <p class="mb-0">{{ billing.phone }}</p>
+            </div>
+            <div class="col-md-6 text-md-right mt-4 mt-md-0">
+              <h6 class="mb-2">Shipping Address:</h6>
+              <p class="mb-0 font-weight-bold">{{ shipping.name }}</p>
+              <p class="mb-0">{{ shipping.address }}</p>
+              {% if shipping.address2 %}
+              <p class="mb-0">{{ shipping.address2 }}</p>
+              {% endif %}
+              <p class="mb-0">{{ shipping.city }}, {{ shipping.province }}, {{ shipping.zip }}</p>
+              <p class="mb-0">{{ shipping.email }}</p>
+              <p class="mb-0">{{ shipping.phone }}</p>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead class="thead-light">
+                <tr>
+                  <th>#</th>
+                  <th>SKU</th>
+                  <th>Name</th>
+                  <th class="text-right">Price</th>
+                  <th class="text-center">Qty</th>
+                  <th class="text-right">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in items %}
+                <tr>
+                  <td>{{ loop.index }}</td>
+                  <td>{{ item.sku }}</td>
+                  <td>{{ item.name }}</td>
+                  <td class="text-right">${{ "%.2f"|format(item.price) }}</td>
+                  <td class="text-center">{{ item.qty }}</td>
+                  <td class="text-right">${{ "%.2f"|format(item.price * item.qty) }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+          <div class="row justify-content-end">
+            <div class="col-md-6">
+              <table class="table table-borderless">
+                <tbody>
+                  <tr>
+                    <td class="font-weight-bold">Subtotal</td>
+                    <td class="text-right">${{ "%.2f"|format(subtotal) }}</td>
+                  </tr>
+                  <tr>
+                    <td class="font-weight-bold">Tax ({{ tax_rate }}%)</td>
+                    <td class="text-right">${{ "%.2f"|format(tax_amount) }}</td>
+                  </tr>
+                  <tr class="border-top">
+                    <td class="font-weight-bold">Total</td>
+                    <td class="text-right font-weight-bold">${{ "%.2f"|format(total) }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card Footer -->
+        <div class="card-footer text-muted text-center">
+          JT's Outdoor Fabrics Inc., 110 Saunders Rd #20, Barrie, ON L4N9A8
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

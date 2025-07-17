@@ -10,6 +10,7 @@ from routes.quote_routes import quote_blueprint
 from routes.featured_brand_routes import featured_brand_blueprint
 from routes.featured_category_routes import featured_category_blueprint
 from routes.quantity_pricing_routes import quantity_pricing_blueprint
+from routes.invoice_routes import invoice_blueprint
 
 from os import getenv
 from mongoengine import connect
@@ -31,6 +32,7 @@ app.register_blueprint(
 app.register_blueprint(
     quantity_pricing_blueprint, url_prefix="/api/v1/quantity-pricing"
 )
+app.register_blueprint(invoice_blueprint, url_prefix="/api/v1/generate-invoice")
 
 
 @app.errorhandler(404)
