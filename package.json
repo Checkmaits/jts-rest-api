@@ -1,0 +1,27 @@
+{
+  "name": "rest.jtsoutdoorfabrics.com",
+  "version": "0.0.1",
+  "description": "REST API for various JT's Outdoor Fabrics services.",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "author": "Brock M. Mowry (jtsoutdoor.brock@gmail.com)",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.0",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.0.1",
+    "helmet": "^8.1.0",
+    "mongoose": "^8.16.4",
+    "morgan": "^1.10.1",
+    "xml2js": "^0.6.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10",
+    "prettier": "^3.6.2"
+  }
+}
